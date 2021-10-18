@@ -1,0 +1,21 @@
+Public SapGuiAuto, WScript, msgcol
+Public objGui  As GuiApplication
+Public objConn As GuiConnection
+Public session As GuiSession
+Public objSBar As GuiStatusbar
+Public objSheet As Worksheet
+
+If objGui Is Nothing Then
+   Set SapGuiAuto = GetObject("SAPGUI")
+   Set objGui = SapGuiAuto.GetScriptingEngine
+End If
+If objConn Is Nothing Then
+   Set objConn = objGui.Children(0)
+End If
+If session Is Nothing Then
+   Set session = objConn.Children(0)
+End If
+If IsObject(WScript) Then
+   WScript.ConnectObject session, "on"
+   WScript.ConnectObject objGui, "on"
+End If
